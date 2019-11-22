@@ -20,23 +20,19 @@ class ColorViewController: UIViewController {
     @IBOutlet weak var blueLabel: UILabel!
     @IBOutlet weak var alphaStepper: UIStepper!
     @IBOutlet weak var alphaLabel: UILabel!
-    
+    @IBOutlet weak var resetButton: UIButton!
     @IBOutlet var allLabels: [UILabel]!
     
     var color: Crayon?
-    
     var redColor = Float()
-    
     var greenColor = Float()
-    
     var blueColor = Float()
-    
     var alpha: Float = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        resetButton.layer.cornerRadius = 8
         guard let theColor = color else {
             fatalError()
         }

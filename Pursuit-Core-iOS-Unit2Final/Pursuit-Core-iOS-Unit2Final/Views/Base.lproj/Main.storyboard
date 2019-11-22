@@ -131,8 +131,14 @@
                                 </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXA-PI-XOq">
-                                <rect key="frame" x="187.5" y="432.5" width="39" height="30"/>
-                                <state key="normal" title="Reset"/>
+                                <rect key="frame" x="182" y="432.5" width="50" height="30"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="IiE-1S-jzP"/>
+                                </constraints>
+                                <state key="normal" title="Reset">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="resetButton:" destination="CDE-0N-LHy" eventType="touchUpInside" id="fCC-eY-BwQ"/>
                                 </connections>
@@ -181,6 +187,7 @@
                         <outlet property="greenSlider" destination="vMZ-ZB-DNx" id="YHh-sV-Vi4"/>
                         <outlet property="redLabel" destination="x8v-Qu-vy2" id="rzy-GN-RlU"/>
                         <outlet property="redSlider" destination="C2l-de-wcf" id="D6o-cA-XVx"/>
+                        <outlet property="resetButton" destination="uXA-PI-XOq" id="8Hp-yU-2mB"/>
                         <outlet property="theEntireView" destination="4h8-Xj-pMn" id="7gs-nl-A9q"/>
                         <outletCollection property="allLabels" destination="oeh-1M-5Sl" collectionClass="NSMutableArray" id="EZ5-2N-dYS"/>
                         <outletCollection property="allLabels" destination="zkc-Ca-w8J" collectionClass="NSMutableArray" id="aC2-uU-XcX"/>
