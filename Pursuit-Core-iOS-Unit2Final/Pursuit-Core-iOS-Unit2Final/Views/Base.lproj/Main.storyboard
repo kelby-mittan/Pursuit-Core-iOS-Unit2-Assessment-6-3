@@ -60,6 +60,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Crayon List" id="NlW-Ae-wXs"/>
+                    <connections>
+                        <outlet property="crayonTableView" destination="woa-5K-Ugq" id="Y48-dV-fGT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

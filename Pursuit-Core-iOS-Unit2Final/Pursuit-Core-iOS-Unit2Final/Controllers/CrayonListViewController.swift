@@ -9,12 +9,44 @@
 import UIKit
 
 class CrayonListViewController: UIViewController {
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
-  }
-
+    
+    @IBOutlet weak var crayonTableView: UITableView!
+    
+    
+    private var crayons = [Crayon]() {
+        didSet {
+            crayonTableView.reloadData()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        crayonTableView.dataSource = self
+        loadData()
+        
+    }
+    
+    func loadData() {
+        crayons = Crayon.allTheCrayons
+    }
 
 }
+
+extension CrayonListViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return crayons.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = crayonTableView.dequeueReusableCell(withIdentifier: "crayonCell", for: indexPath)
+        let crayon = crayons[indexPath.row]
+        
+        return cell
+    }
+}
+    
+
 
