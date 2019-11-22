@@ -9,14 +9,35 @@
 import UIKit
 
 class ColorViewController: UIViewController {
+    
     @IBOutlet var theEntireView: UIView!
+    @IBOutlet weak var redSlider: UISlider!
+    @IBOutlet weak var greenSlider: UISlider!
+    @IBOutlet weak var blueSlider: UISlider!
+    @IBOutlet weak var redLabel: UILabel!
+    @IBOutlet weak var greenLabel: UILabel!
+    @IBOutlet weak var blueLabel: UILabel!
+    @IBOutlet weak var alphaStepper: UIStepper!
+    @IBOutlet weak var alphaLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
     
-
+    func configureRedSlider() {
+        redSlider.minimumValue = 0
+        redSlider.maximumValue = 1.0
+        redSlider.value = 17
+    }
+    
+    
+    @IBAction func resetButton(_ sender: UIButton) {
+        
+        
+    }
+    
 }
 
 

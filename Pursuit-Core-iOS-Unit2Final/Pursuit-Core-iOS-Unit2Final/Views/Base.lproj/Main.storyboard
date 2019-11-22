@@ -121,6 +121,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXA-PI-XOq">
                                 <rect key="frame" x="187.5" y="432.5" width="39" height="30"/>
                                 <state key="normal" title="Reset"/>
+                                <connections>
+                                    <action selector="resetButton:" destination="CDE-0N-LHy" eventType="touchUpInside" id="fCC-eY-BwQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -157,6 +160,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="Jys-zg-o8g"/>
                     <connections>
+                        <outlet property="alphaLabel" destination="oeh-1M-5Sl" id="EF5-lD-Zoh"/>
+                        <outlet property="alphaStepper" destination="Itp-ZY-Kv5" id="Th8-bV-iyZ"/>
+                        <outlet property="blueLabel" destination="zkc-Ca-w8J" id="l3e-lk-enr"/>
+                        <outlet property="blueSlider" destination="One-bQ-LxP" id="oiL-XP-m6l"/>
+                        <outlet property="greenLabel" destination="zOw-nw-6W0" id="waK-7A-q3N"/>
+                        <outlet property="greenSlider" destination="vMZ-ZB-DNx" id="YHh-sV-Vi4"/>
+                        <outlet property="redLabel" destination="x8v-Qu-vy2" id="rzy-GN-RlU"/>
+                        <outlet property="redSlider" destination="C2l-de-wcf" id="D6o-cA-XVx"/>
                         <outlet property="theEntireView" destination="4h8-Xj-pMn" id="7gs-nl-A9q"/>
                     </connections>
                 </viewController>
