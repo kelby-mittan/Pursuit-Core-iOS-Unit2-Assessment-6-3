@@ -107,6 +107,19 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func resetButton(_ sender: UIButton) {
+        guard let resetColor = color else {
+            fatalError()
+        }
+        
+        theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(resetColor.red / 255), green: CGFloat(resetColor.green / 255), blue: CGFloat(resetColor.blue / 255), alpha: 1.0)
+        
+        redLabel.text = "Red: \((Double(resetColor.red) / 255).description)"
+        greenLabel.text = "Green: \((Double(resetColor.green) / 255).description)"
+        blueLabel.text = "Blue: \((Double(resetColor.blue) / 255).description)"
+        
+        redColor = Float(resetColor.red / 255)
+        greenColor = Float(resetColor.green / 255)
+        blueColor = Float(resetColor.blue / 255)
         
         
     }
