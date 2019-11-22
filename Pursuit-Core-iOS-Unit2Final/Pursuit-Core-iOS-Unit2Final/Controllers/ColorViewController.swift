@@ -52,7 +52,7 @@ class ColorViewController: UIViewController {
         
         configureSliders()
         configureStepper()
-
+        
     }
     
     func configureSliders() {
@@ -122,6 +122,9 @@ class ColorViewController: UIViewController {
         greenColor = Float(resetColor.green / 255)
         blueColor = Float(resetColor.blue / 255)
         alpha = 1.0
+        redSlider.value = redColor
+        greenSlider.value = greenColor
+        blueSlider.value = blueColor
         
         
     }
