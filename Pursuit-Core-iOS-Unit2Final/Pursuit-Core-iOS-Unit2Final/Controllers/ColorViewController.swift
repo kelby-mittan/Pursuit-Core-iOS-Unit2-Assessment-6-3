@@ -10,6 +10,8 @@ import UIKit
 
 class ColorViewController: UIViewController {
     
+    // MARK:- Outlets and Properties
+    
     @IBOutlet weak var crayonNameLabel: UILabel!
     @IBOutlet var theEntireView: UIView!
     @IBOutlet weak var redSlider: UISlider!
@@ -22,11 +24,8 @@ class ColorViewController: UIViewController {
     @IBOutlet weak var alphaLabel: UILabel!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet var allLabels: [UILabel]!
-    
     @IBOutlet weak var redTextField: UITextField!
-    
     @IBOutlet weak var greenTextField: UITextField!
-    
     @IBOutlet weak var blueTextField: UITextField!
     
     var color: Crayon?
@@ -35,6 +34,7 @@ class ColorViewController: UIViewController {
     var blueColor = Float()
     var alpha: Float = 1.0
     
+    // MARK:- viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,6 +64,7 @@ class ColorViewController: UIViewController {
         
     }
     
+    //MARK:- configure functions
     func configureSliders() {
         
         guard let theColor = color else {
@@ -110,6 +111,7 @@ class ColorViewController: UIViewController {
         }
     }
     
+    // MARK:- Outlet Actions
     @IBAction func redSliderChanged(_ sender: UISlider) {
         redLabel.text = "Red: " + String(format: "%.0f", (sender.value * 255))
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(sender.value), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
@@ -166,10 +168,8 @@ class ColorViewController: UIViewController {
     }
     
 }
-
+// MARK:- TextField Delegate
 extension ColorViewController: UITextFieldDelegate {
-    
-    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else {
@@ -193,35 +193,40 @@ extension ColorViewController: UITextFieldDelegate {
         
         if textField == redTextField {
             redAsString = redTextField.text ?? "255"
-            redColor = Float(redAsString)! / 255
-            if !redAsString.isEmpty && redColor <= 1.0 {
-                theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
-                redLabel.text = "Red: " + String(format: "%.0f", (redColor * 255))
-                redSlider.value = redColor
-                lightText()
-                textField.text = ""
+            if !redAsString.isEmpty {
+                redColor = Float(redAsString)! / 255
+                if redColor <= 1.0 {
+                    theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
+                    redLabel.text = "Red: " + String(format: "%.0f", (redColor * 255))
+                    redSlider.value = redColor
+                    lightText()
+                    textField.text = ""
+                }
             }
             
         } else if textField == greenTextField {
             greenAsString = greenTextField.text ?? "255"
-            greenColor = Float(greenAsString)! / 255
-            if !greenAsString.isEmpty && greenColor <= 1.0 {
-                theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
-                greenLabel.text = "Green: " + String(format: "%.0f", (greenColor * 255))
-                greenSlider.value = greenColor
-                lightText()
+            if !greenAsString.isEmpty {
+                greenColor = Float(greenAsString)! / 255
+                if greenColor <= 1.0 {
+                    theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
+                    greenLabel.text = "Green: " + String(format: "%.0f", (greenColor * 255))
+                    greenSlider.value = greenColor
+                    lightText()
+                }
             }
             
         } else if textField == blueTextField {
             blueAsString = blueTextField.text ?? "255"
-            blueColor = Float(blueAsString)! / 255
-            if !blueAsString.isEmpty && blueColor <= 1.0 {
-                theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
-                blueLabel.text = "Blue: " + String(format: "%.0f", (blueColor * 255))
-                blueSlider.value = blueColor
-                lightText()
+            if !blueAsString.isEmpty {
+                blueColor = Float(blueAsString)! / 255
+                if blueColor <= 1.0 {
+                    theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
+                    blueLabel.text = "Blue: " + String(format: "%.0f", (blueColor * 255))
+                    blueSlider.value = blueColor
+                    lightText()
+                }
             }
-            
         }
         textField.text = ""
         return true
