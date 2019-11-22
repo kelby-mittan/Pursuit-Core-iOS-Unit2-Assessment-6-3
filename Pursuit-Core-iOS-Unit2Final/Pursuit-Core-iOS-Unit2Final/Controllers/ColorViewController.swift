@@ -46,9 +46,9 @@ class ColorViewController: UIViewController {
         
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(theColor.red / 255), green: CGFloat(theColor.green / 255), blue: CGFloat(theColor.blue / 255), alpha: 1.0)
         
-        redLabel.text = "Red: \((Double(theColor.red) / 255).description)"
-        greenLabel.text = "Green: \((Double(theColor.green) / 255).description)"
-        blueLabel.text = "Blue: \((Double(theColor.blue) / 255).description)"
+        redLabel.text = "Red: " + String(format: "%.9f", (Double(theColor.red) / 255))
+        greenLabel.text = "Green: " + String(format: "%.9f", (Double(theColor.green) / 255))
+        blueLabel.text = "Blue: " + String(format: "%.9f", (Double(theColor.blue) / 255))
         
         configureSliders()
         configureStepper()
@@ -80,28 +80,29 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func redSliderChanged(_ sender: UISlider) {
-        redLabel.text = "Red: \((Double(sender.value)).description)"
+        redLabel.text = "Red: " + String(format: "%.9f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(sender.value), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         redColor = sender.value
         
     }
     
     @IBAction func greenSliderChanged(_ sender: UISlider) {
-        greenLabel.text = "Green: \((Double(sender.value)).description)"
+        greenLabel.text = "Green: " + String(format: "%.9f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(sender.value), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         greenColor = sender.value
     }
     
     
     @IBAction func blueSliderChanged(_ sender: UISlider) {
-        blueLabel.text = "Blue: \((Double(sender.value)).description)"
+        blueLabel.text = "Blue: " + String(format: "%.9f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(sender.value), alpha: CGFloat(alpha))
         blueColor = sender.value
     }
     
     @IBAction func alphaStepperAction(_ sender: UIStepper) {
         alphaStepper.value = sender.value
-        alphaLabel.text = sender.value.description
+        alphaLabel.text = "Alpha: " + String(format: "%.1f", sender.value)
+        theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(sender.value))
         alpha = Float(sender.value)
         
     }
@@ -116,10 +117,11 @@ class ColorViewController: UIViewController {
         redLabel.text = "Red: \((Double(resetColor.red) / 255).description)"
         greenLabel.text = "Green: \((Double(resetColor.green) / 255).description)"
         blueLabel.text = "Blue: \((Double(resetColor.blue) / 255).description)"
-        
+        alphaLabel.text = "Alpha: 1.0"
         redColor = Float(resetColor.red / 255)
         greenColor = Float(resetColor.green / 255)
         blueColor = Float(resetColor.blue / 255)
+        alpha = 1.0
         
         
     }
