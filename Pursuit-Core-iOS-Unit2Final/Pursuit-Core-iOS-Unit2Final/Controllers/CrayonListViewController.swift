@@ -44,6 +44,8 @@ extension CrayonListViewController: UITableViewDataSource {
         let cell = crayonTableView.dequeueReusableCell(withIdentifier: "crayonCell", for: indexPath)
         let crayon = crayons[indexPath.row]
         
+        cell.textLabel?.text = crayon.name
+        cell.detailTextLabel?.text = crayon.hex
         return cell
     }
 }
