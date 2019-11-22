@@ -54,9 +54,9 @@ class ColorViewController: UIViewController {
         
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(theColor.red / 255), green: CGFloat(theColor.green / 255), blue: CGFloat(theColor.blue / 255), alpha: 1.0)
         
-        redLabel.text = "Red: " + String(format: "%.0f", theColor.red)
-        greenLabel.text = "Green: " + String(format: "%.0f", theColor.green)
-        blueLabel.text = "Blue: " + String(format: "%.0f", theColor.blue)
+        redLabel.text = "Red: " + String(format: "%.4f", (theColor.red / 255))
+        greenLabel.text = "Green: " + String(format: "%.4f", (theColor.green / 255))
+        blueLabel.text = "Blue: " + String(format: "%.4f", (theColor.blue / 255))
         
         lightText()
         configureSliders()
@@ -113,7 +113,7 @@ class ColorViewController: UIViewController {
     
     // MARK:- Outlet Actions
     @IBAction func redSliderChanged(_ sender: UISlider) {
-        redLabel.text = "Red: " + String(format: "%.0f", (sender.value * 255))
+        redLabel.text = "Red: " + String(format: "%.4f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(sender.value), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         redColor = sender.value
         lightText()
@@ -121,7 +121,7 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func greenSliderChanged(_ sender: UISlider) {
-        greenLabel.text = "Green: " + String(format: "%.0f", (sender.value * 255))
+        greenLabel.text = "Green: " + String(format: "%.4f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(sender.value), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         greenColor = sender.value
         lightText()
@@ -129,7 +129,7 @@ class ColorViewController: UIViewController {
     
     
     @IBAction func blueSliderChanged(_ sender: UISlider) {
-        blueLabel.text = "Blue: " + String(format: "%.0f", (sender.value * 255))
+        blueLabel.text = "Blue: " + String(format: "%.4f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(sender.value), alpha: CGFloat(alpha))
         blueColor = sender.value
         lightText()
@@ -151,9 +151,9 @@ class ColorViewController: UIViewController {
         
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(resetColor.red / 255), green: CGFloat(resetColor.green / 255), blue: CGFloat(resetColor.blue / 255), alpha: 1.0)
         
-        redLabel.text = "Red: " + String(format: "%.0f", resetColor.red)
-        greenLabel.text = "Green: " + String(format: "%.0f", resetColor.green)
-        blueLabel.text = "Blue: " + String(format: "%.0f", resetColor.blue)
+        redLabel.text = "Red: " + String(format: "%.4f", (resetColor.red / 255))
+        greenLabel.text = "Green: " + String(format: "%.4f", (resetColor.green / 255))
+        blueLabel.text = "Blue: " + String(format: "%.4f", (resetColor.blue / 255))
         alphaLabel.text = "Alpha: 1.0"
         redColor = Float(resetColor.red / 255)
         greenColor = Float(resetColor.green / 255)
@@ -176,9 +176,9 @@ extension ColorViewController: UITextFieldDelegate {
             fatalError()
         }
         let currentText = text + string
-        let validNumbers = ["0","1","2","3","4","5","6","7","8","9"]
+        let validNumbers = ["0","1","2","3","4","5","6","7","8","9","."]
         
-        if currentText.count > 3 || !validNumbers.contains(string) {
+        if currentText.count > 8 || !validNumbers.contains(string) {
             return false
         }
         return true
@@ -192,37 +192,35 @@ extension ColorViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         if textField == redTextField {
-            redAsString = redTextField.text ?? "255"
+            redAsString = redTextField.text ?? "1.0"
             if !redAsString.isEmpty {
-                redColor = Float(redAsString)! / 255
+                redColor = Float(redAsString)!
                 if redColor <= 1.0 {
                     theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
-                    redLabel.text = "Red: " + String(format: "%.0f", (redColor * 255))
+                    redLabel.text = "Red: " + String(format: "%.4f", redColor)
                     redSlider.value = redColor
                     lightText()
                     textField.text = ""
                 }
             }
-            
         } else if textField == greenTextField {
-            greenAsString = greenTextField.text ?? "255"
+            greenAsString = greenTextField.text ?? "1.0"
             if !greenAsString.isEmpty {
-                greenColor = Float(greenAsString)! / 255
+                greenColor = Float(greenAsString)!
                 if greenColor <= 1.0 {
                     theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
-                    greenLabel.text = "Green: " + String(format: "%.0f", (greenColor * 255))
+                    greenLabel.text = "Green: " + String(format: "%.4f", greenColor)
                     greenSlider.value = greenColor
                     lightText()
                 }
             }
-            
         } else if textField == blueTextField {
-            blueAsString = blueTextField.text ?? "255"
+            blueAsString = blueTextField.text ?? "1.0"
             if !blueAsString.isEmpty {
-                blueColor = Float(blueAsString)! / 255
+                blueColor = Float(blueAsString)!
                 if blueColor <= 1.0 {
                     theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
-                    blueLabel.text = "Blue: " + String(format: "%.0f", (blueColor * 255))
+                    blueLabel.text = "Blue: " + String(format: "%.4f", blueColor)
                     blueSlider.value = blueColor
                     lightText()
                 }
