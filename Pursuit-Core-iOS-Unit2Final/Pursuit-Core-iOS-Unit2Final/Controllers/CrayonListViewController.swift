@@ -30,6 +30,15 @@ class CrayonListViewController: UIViewController {
     func loadData() {
         crayons = Crayon.allTheCrayons
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let colorVC = segue.destination as? ColorViewController, let indexPath = crayonTableView.indexPathForSelectedRow else {
+            fatalError()
+        }
+        
+        colorVC.color = crayons[indexPath.row]
+    }
 
 }
 

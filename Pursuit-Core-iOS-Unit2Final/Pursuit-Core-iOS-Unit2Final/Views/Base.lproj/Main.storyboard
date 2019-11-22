@@ -90,6 +90,9 @@
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="C2l-de-wcf">
                                 <rect key="frame" x="92.5" y="188.5" width="303.5" height="31"/>
+                                <connections>
+                                    <action selector="redSliderChanged:" destination="CDE-0N-LHy" eventType="valueChanged" id="I4W-9O-lzr"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOw-nw-6W0">
                                 <rect key="frame" x="20" y="244" width="51" height="21"/>
@@ -105,9 +108,15 @@
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vMZ-ZB-DNx">
                                 <rect key="frame" x="92.5" y="239.5" width="303.5" height="31"/>
+                                <connections>
+                                    <action selector="greenSliderChanged:" destination="CDE-0N-LHy" eventType="valueChanged" id="hkZ-68-JPB"/>
+                                </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="One-bQ-LxP">
                                 <rect key="frame" x="92.5" y="290.5" width="303.5" height="31"/>
+                                <connections>
+                                    <action selector="blueSliderChanged:" destination="CDE-0N-LHy" eventType="valueChanged" id="r3h-mi-WQ5"/>
+                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alpha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeh-1M-5Sl">
                                 <rect key="frame" x="20" y="356" width="169.5" height="21"/>
@@ -117,6 +126,9 @@
                             </label>
                             <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Itp-ZY-Kv5">
                                 <rect key="frame" x="197.5" y="350.5" width="94" height="32"/>
+                                <connections>
+                                    <action selector="alphaStepperAction:" destination="CDE-0N-LHy" eventType="valueChanged" id="7K5-08-cTb"/>
+                                </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXA-PI-XOq">
                                 <rect key="frame" x="187.5" y="432.5" width="39" height="30"/>
@@ -164,6 +176,7 @@
                         <outlet property="alphaStepper" destination="Itp-ZY-Kv5" id="Th8-bV-iyZ"/>
                         <outlet property="blueLabel" destination="zkc-Ca-w8J" id="l3e-lk-enr"/>
                         <outlet property="blueSlider" destination="One-bQ-LxP" id="oiL-XP-m6l"/>
+                        <outlet property="crayonNameLabel" destination="gyU-sE-ova" id="zft-pd-IP2"/>
                         <outlet property="greenLabel" destination="zOw-nw-6W0" id="waK-7A-q3N"/>
                         <outlet property="greenSlider" destination="vMZ-ZB-DNx" id="YHh-sV-Vi4"/>
                         <outlet property="redLabel" destination="x8v-Qu-vy2" id="rzy-GN-RlU"/>
