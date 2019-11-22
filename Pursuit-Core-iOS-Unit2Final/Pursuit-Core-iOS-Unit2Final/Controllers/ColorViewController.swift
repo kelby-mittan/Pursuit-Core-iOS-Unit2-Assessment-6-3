@@ -21,6 +21,8 @@ class ColorViewController: UIViewController {
     @IBOutlet weak var alphaStepper: UIStepper!
     @IBOutlet weak var alphaLabel: UILabel!
     
+    @IBOutlet var allLabels: [UILabel]!
+    
     var color: Crayon?
     
     var redColor = Float()
@@ -50,6 +52,7 @@ class ColorViewController: UIViewController {
         greenLabel.text = "Green: " + String(format: "%.9f", (Double(theColor.green) / 255))
         blueLabel.text = "Blue: " + String(format: "%.9f", (Double(theColor.blue) / 255))
         
+        lightText()
         configureSliders()
         configureStepper()
         
@@ -79,10 +82,33 @@ class ColorViewController: UIViewController {
         alphaStepper.value = 1.0
     }
     
+    func lightText() {
+        
+        if alpha > 0.4 {
+            switch redColor + greenColor + blueColor + alpha {
+            case ..<2.0:
+                for label in allLabels {
+                    label.textColor = .white
+                }
+            case 2.0...:
+                for label in allLabels {
+                    label.textColor = .black
+                }
+            default:
+                fatalError()
+            }
+        } else {
+            for label in allLabels {
+                label.textColor = .white
+            }
+        }
+    }
+    
     @IBAction func redSliderChanged(_ sender: UISlider) {
         redLabel.text = "Red: " + String(format: "%.9f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(sender.value), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         redColor = sender.value
+        lightText()
         
     }
     
@@ -90,6 +116,7 @@ class ColorViewController: UIViewController {
         greenLabel.text = "Green: " + String(format: "%.9f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(sender.value), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         greenColor = sender.value
+        lightText()
     }
     
     
@@ -97,6 +124,7 @@ class ColorViewController: UIViewController {
         blueLabel.text = "Blue: " + String(format: "%.9f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(sender.value), alpha: CGFloat(alpha))
         blueColor = sender.value
+        lightText()
     }
     
     @IBAction func alphaStepperAction(_ sender: UIStepper) {
@@ -104,6 +132,7 @@ class ColorViewController: UIViewController {
         alphaLabel.text = "Alpha: " + String(format: "%.1f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(sender.value))
         alpha = Float(sender.value)
+        lightText()
         
     }
     
@@ -126,7 +155,7 @@ class ColorViewController: UIViewController {
         redSlider.value = redColor
         greenSlider.value = greenColor
         blueSlider.value = blueColor
-        
+        lightText()
         
     }
     

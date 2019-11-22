@@ -182,6 +182,11 @@
                         <outlet property="redLabel" destination="x8v-Qu-vy2" id="rzy-GN-RlU"/>
                         <outlet property="redSlider" destination="C2l-de-wcf" id="D6o-cA-XVx"/>
                         <outlet property="theEntireView" destination="4h8-Xj-pMn" id="7gs-nl-A9q"/>
+                        <outletCollection property="allLabels" destination="oeh-1M-5Sl" collectionClass="NSMutableArray" id="EZ5-2N-dYS"/>
+                        <outletCollection property="allLabels" destination="zkc-Ca-w8J" collectionClass="NSMutableArray" id="aC2-uU-XcX"/>
+                        <outletCollection property="allLabels" destination="zOw-nw-6W0" collectionClass="NSMutableArray" id="HUS-Zy-aGL"/>
+                        <outletCollection property="allLabels" destination="x8v-Qu-vy2" collectionClass="NSMutableArray" id="Uoj-vR-Xv0"/>
+                        <outletCollection property="allLabels" destination="gyU-sE-ova" collectionClass="NSMutableArray" id="lVW-5A-gwv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZH-Tc-Ucn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
