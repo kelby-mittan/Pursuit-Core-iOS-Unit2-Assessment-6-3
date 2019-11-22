@@ -169,6 +169,21 @@ class ColorViewController: UIViewController {
 
 extension ColorViewController: UITextFieldDelegate {
     
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else {
+            fatalError()
+        }
+        let currentText = text + string
+        let validNumbers = ["0","1","2","3","4","5","6","7","8","9"]
+        
+        if currentText.count > 3 || !validNumbers.contains(string) {
+            return false
+        }
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         var redAsString = String()
         var greenAsString = String()
@@ -178,8 +193,8 @@ extension ColorViewController: UITextFieldDelegate {
         
         if textField == redTextField {
             redAsString = redTextField.text ?? "255"
-            if !redAsString.isEmpty {
-                redColor = Float(redAsString)! / 255
+            redColor = Float(redAsString)! / 255
+            if !redAsString.isEmpty && redColor <= 1.0 {
                 theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
                 redLabel.text = "Red: " + String(format: "%.0f", (redColor * 255))
                 redSlider.value = redColor
@@ -189,8 +204,8 @@ extension ColorViewController: UITextFieldDelegate {
             
         } else if textField == greenTextField {
             greenAsString = greenTextField.text ?? "255"
-            if !greenAsString.isEmpty {
-                greenColor = Float(greenAsString)! / 255
+            greenColor = Float(greenAsString)! / 255
+            if !greenAsString.isEmpty && greenColor <= 1.0 {
                 theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
                 greenLabel.text = "Green: " + String(format: "%.0f", (greenColor * 255))
                 greenSlider.value = greenColor
@@ -199,8 +214,8 @@ extension ColorViewController: UITextFieldDelegate {
             
         } else if textField == blueTextField {
             blueAsString = blueTextField.text ?? "255"
-            if !blueAsString.isEmpty {
-                blueColor = Float(blueAsString)! / 255
+            blueColor = Float(blueAsString)! / 255
+            if !blueAsString.isEmpty && blueColor <= 1.0 {
                 theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
                 blueLabel.text = "Blue: " + String(format: "%.0f", (blueColor * 255))
                 blueSlider.value = blueColor
