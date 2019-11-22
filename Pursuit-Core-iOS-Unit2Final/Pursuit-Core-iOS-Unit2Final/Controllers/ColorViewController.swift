@@ -23,6 +23,12 @@ class ColorViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet var allLabels: [UILabel]!
     
+    @IBOutlet weak var redTextField: UITextField!
+    
+    @IBOutlet weak var greenTextField: UITextField!
+    
+    @IBOutlet weak var blueTextField: UITextField!
+    
     var color: Crayon?
     var redColor = Float()
     var greenColor = Float()
@@ -31,6 +37,10 @@ class ColorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        redTextField.delegate = self
+        greenTextField.delegate = self
+        blueTextField.delegate = self
         
         resetButton.layer.cornerRadius = 8
         guard let theColor = color else {
@@ -44,9 +54,9 @@ class ColorViewController: UIViewController {
         
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(theColor.red / 255), green: CGFloat(theColor.green / 255), blue: CGFloat(theColor.blue / 255), alpha: 1.0)
         
-        redLabel.text = "Red: " + String(format: "%.9f", (Double(theColor.red) / 255))
-        greenLabel.text = "Green: " + String(format: "%.9f", (Double(theColor.green) / 255))
-        blueLabel.text = "Blue: " + String(format: "%.9f", (Double(theColor.blue) / 255))
+        redLabel.text = "Red: " + String(format: "%.0f", theColor.red)
+        greenLabel.text = "Green: " + String(format: "%.0f", theColor.green)
+        blueLabel.text = "Blue: " + String(format: "%.0f", theColor.blue)
         
         lightText()
         configureSliders()
@@ -101,7 +111,7 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func redSliderChanged(_ sender: UISlider) {
-        redLabel.text = "Red: " + String(format: "%.9f", sender.value)
+        redLabel.text = "Red: " + String(format: "%.0f", (sender.value * 255))
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(sender.value), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         redColor = sender.value
         lightText()
@@ -109,7 +119,7 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func greenSliderChanged(_ sender: UISlider) {
-        greenLabel.text = "Green: " + String(format: "%.9f", sender.value)
+        greenLabel.text = "Green: " + String(format: "%.0f", (sender.value * 255))
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(sender.value), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         greenColor = sender.value
         lightText()
@@ -117,7 +127,7 @@ class ColorViewController: UIViewController {
     
     
     @IBAction func blueSliderChanged(_ sender: UISlider) {
-        blueLabel.text = "Blue: " + String(format: "%.9f", sender.value)
+        blueLabel.text = "Blue: " + String(format: "%.0f", (sender.value * 255))
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(sender.value), alpha: CGFloat(alpha))
         blueColor = sender.value
         lightText()
@@ -139,9 +149,9 @@ class ColorViewController: UIViewController {
         
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(resetColor.red / 255), green: CGFloat(resetColor.green / 255), blue: CGFloat(resetColor.blue / 255), alpha: 1.0)
         
-        redLabel.text = "Red: \((Double(resetColor.red) / 255).description)"
-        greenLabel.text = "Green: \((Double(resetColor.green) / 255).description)"
-        blueLabel.text = "Blue: \((Double(resetColor.blue) / 255).description)"
+        redLabel.text = "Red: " + String(format: "%.0f", resetColor.red)
+        greenLabel.text = "Green: " + String(format: "%.0f", resetColor.green)
+        blueLabel.text = "Blue: " + String(format: "%.0f", resetColor.blue)
         alphaLabel.text = "Alpha: 1.0"
         redColor = Float(resetColor.red / 255)
         greenColor = Float(resetColor.green / 255)
@@ -155,6 +165,52 @@ class ColorViewController: UIViewController {
         
     }
     
+}
+
+extension ColorViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        var redAsString = String()
+        var greenAsString = String()
+        var blueAsString = String()
+        
+        textField.resignFirstResponder()
+        
+        if textField == redTextField {
+            redAsString = redTextField.text ?? "255"
+            if !redAsString.isEmpty {
+                redColor = Float(redAsString)! / 255
+                theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
+                redLabel.text = "Red: " + String(format: "%.0f", (redColor * 255))
+                redSlider.value = redColor
+                lightText()
+                textField.text = ""
+            }
+            
+        } else if textField == greenTextField {
+            greenAsString = greenTextField.text ?? "255"
+            if !greenAsString.isEmpty {
+                greenColor = Float(greenAsString)! / 255
+                theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
+                greenLabel.text = "Green: " + String(format: "%.0f", (greenColor * 255))
+                greenSlider.value = greenColor
+                lightText()
+            }
+            
+        } else if textField == blueTextField {
+            blueAsString = blueTextField.text ?? "255"
+            if !blueAsString.isEmpty {
+                blueColor = Float(blueAsString)! / 255
+                theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
+                blueLabel.text = "Blue: " + String(format: "%.0f", (blueColor * 255))
+                blueSlider.value = blueColor
+                lightText()
+            }
+            
+        }
+        textField.text = ""
+        return true
+    }
 }
 
 
