@@ -27,12 +27,30 @@ class ColorViewController: UIViewController {
     @IBOutlet weak var redTextField: UITextField!
     @IBOutlet weak var greenTextField: UITextField!
     @IBOutlet weak var blueTextField: UITextField!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
     
     var color: Crayon?
     var redColor = Float()
     var greenColor = Float()
     var blueColor = Float()
     var alpha: Float = 1.0
+    
+    var currentSegmentIndex: Int = 0 {
+        didSet {
+            switch segmentControl.selectedSegmentIndex {
+            case 0:
+                redLabel.text = "Red: " + String(format: "%.4f", redSlider.value)
+                greenLabel.text = "Green: " + String(format: "%.4f", greenSlider.value)
+                blueLabel.text = "Blue: " + String(format: "%.4f", blueSlider.value)
+            case 1:
+                redLabel.text = "Red Hex: " + String(format:"%02X", Int(redColor * 255))
+                greenLabel.text = "Green Hex: " + String(format:"%02X", Int(greenColor * 255))
+                blueLabel.text = "Blue Hex: " + String(format:"%02X", Int(blueColor * 255))
+            default:
+                fatalError()
+            }
+        }
+    }
     
     // MARK:- viewDidLoad
     override func viewDidLoad() {
@@ -41,7 +59,6 @@ class ColorViewController: UIViewController {
         redTextField.delegate = self
         greenTextField.delegate = self
         blueTextField.delegate = self
-        
         resetButton.layer.cornerRadius = 8
         guard let theColor = color else {
             fatalError()
@@ -113,26 +130,37 @@ class ColorViewController: UIViewController {
     
     // MARK:- Outlet Actions
     @IBAction func redSliderChanged(_ sender: UISlider) {
-        redLabel.text = "Red: " + String(format: "%.4f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(sender.value), green: CGFloat(greenColor), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         redColor = sender.value
         lightText()
-        
+        if currentSegmentIndex == 0 {
+            redLabel.text = "Red: " + String(format: "%.4f", sender.value)
+        } else {
+            redLabel.text = "Green Hex: " + String(format:"%02X", Int(redColor * 255))
+        }
     }
     
     @IBAction func greenSliderChanged(_ sender: UISlider) {
-        greenLabel.text = "Green: " + String(format: "%.4f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(sender.value), blue: CGFloat(blueColor), alpha: CGFloat(alpha))
         greenColor = sender.value
         lightText()
+        if currentSegmentIndex == 0 {
+            greenLabel.text = "Green: " + String(format: "%.4f", sender.value)
+        } else {
+            greenLabel.text = "Green Hex: " + String(format:"%02X", Int(greenColor * 255))
+        }
     }
     
     
     @IBAction func blueSliderChanged(_ sender: UISlider) {
-        blueLabel.text = "Blue: " + String(format: "%.4f", sender.value)
         theEntireView.backgroundColor = UIColor(displayP3Red: CGFloat(redColor), green: CGFloat(greenColor), blue: CGFloat(sender.value), alpha: CGFloat(alpha))
         blueColor = sender.value
         lightText()
+        if currentSegmentIndex == 0 {
+            blueLabel.text = "Blue: " + String(format: "%.4f", sender.value)
+        } else {
+            blueLabel.text = "Blue Hex: " + String(format:"%02X", Int(blueColor * 255))
+        }
     }
     
     @IBAction func alphaStepperAction(_ sender: UIStepper) {
@@ -164,6 +192,10 @@ class ColorViewController: UIViewController {
         greenSlider.value = greenColor
         blueSlider.value = blueColor
         lightText()
+        
+    }
+    @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
+        currentSegmentIndex = sender.selectedSegmentIndex
         
     }
     
